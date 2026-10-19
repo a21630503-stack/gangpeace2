@@ -1,6 +1,7 @@
-from flask import Flask, Response
+import streamlit as st
+import streamlit.components.v1 as components
 
-app = Flask(__name__)
+st.set_page_config(page_title="무인도 생존기", page_icon="🏝️", layout="wide")
 
 GAME_HTML = r"""<!DOCTYPE html>
 <html lang="ko">
@@ -1303,11 +1304,4 @@ function animate(){
 </html>
 """
 
-@app.route("/")
-def index():
-    return Response(GAME_HTML, mimetype="text/html")
-
-if __name__ == "__main__":
-    import os
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port, debug=True)
+components.html(GAME_HTML, height=1000, scrolling=True)
